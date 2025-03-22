@@ -1,67 +1,52 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Önskelista</title>
-    <style>
-        body {
-            background-color: rgba(255, 192, 203, 0.274);
-            font-family: 'Footlight MT Light', sans-serif;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-        }
-
-        img {
-            max-width: 100%;
-            border: 2px solid black;
-        }
-
-        p {
-            max-width: 100%;
-            font-size: 64px;
-        }
-
-        h1 {
-            font-size: 100px;
-        }
-
-        h2 {
-            font-size: 90px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
+    <section id="hero" class="hero">
         <h1>Önskelista</h1>
         <p>
-            <br>
             För den som vill ge en present så är jag tacksam för bidrag till sommarens upplevelse. Jag har
             länge haft som högsta önskan att åka till Rift Valley i Kenya och Tanzania och nu ska det bli av!
             På vägen hem stannar vi till i Ghana. Om du vill ge någon present så får du gärna bidra till denna,
             som jag hoppas, fantastiska upplevelse. Se olika önskningar genom att klicka på tårtljusen i
             Rebeccas fina teckning.
             Det går väldigt bra att skriva in er grattishälsning här i stället för i separat födelsedagskort :-)
-            <br>
-            <br>
-            <br>
         </p>
-        <img src="bild.png">
-        <br>
+        <button id="launch">Se önskningar</button>
+    </section>
+
+    <figure id="map" class="hidden">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 4961 3507" preserveAspectRatio="xMinYMin meet">
+            <image width="4961" height="3507" xlink:href="./bild.png" />
+        </svg>
+    </figure>
+
+    <!-- <section>
         <h2>Instruktioner</h2>
         <p>
-            <br>
             Ge present genom att skriva in ert namn/hälsning på något ni vill ge hela eller delar av. (Detta kommer
             att bli synligt för andra.) Vid tekniska problem kontakta min IT-expert Daniel på 0722-338392 eller prata
             med honom på festen.
         </p>
-    </div>
+    </section> -->
 </body>
+
+<script>
+    const btn = document.querySelector("#launch");
+    const hero = document.querySelector("#hero");
+    const mapEl = document.querySelector("#map");
+    btn.addEventListener("click", () => {
+        hero.classList.toggle("hidden");
+        mapEl.classList.toggle("hidden");
+    });
+</script>
 
 </html>
