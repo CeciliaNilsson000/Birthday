@@ -2,32 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Önskelista</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+    <div class="background-container">
+        <img src="background.webp" class="background-image" alt="Interactive Background" />
+        <svg class="svg-overlay" viewBox="0 0 2560 1080" preserveAspectRatio="xMidYMid slice"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" xmlns="http://www.w3.org/2000/svg">
+
+            <a href="#hotell">
+                <circle class="pulsating-dot" cx="720" cy="800" r="30" fill="white"></circle>
+                <circle class="radiating-circle" cx="720" cy="800" r="30" fill="white" fill-opacity="0.4"></circle>
+            </a>
+
+            <a href="#kilimanjaro">
+                <circle class="pulsating-dot" cx="900" cy="320" r="30" fill="white"></circle>
+                <circle class="radiating-circle" cx="900" cy="320" r="30" fill="white" fill-opacity="0.4"></circle>
+            </a>
+        </svg>
+    </div>
+
     <section id="hero" class="hero">
         <h1>Önskelista</h1>
         <p>
-            För den som vill ge en present så är jag tacksam för bidrag till sommarens upplevelse. Jag har
-            länge haft som högsta önskan att åka till Rift Valley i Kenya och Tanzania och nu ska det bli av!
-            På vägen hem stannar vi till i Ghana. Om du vill ge någon present så får du gärna bidra till denna,
-            som jag hoppas, fantastiska upplevelse. Se olika önskningar genom att klicka på tårtljusen i
-            Rebeccas fina teckning.
-            Det går väldigt bra att skriva in er grattishälsning här i stället för i separat födelsedagskort :-)
+            För den som vill ge en present så är jag tacksam för bidrag till
+            sommarens upplevelse. Jag har länge haft som högsta önskan att åka till
+            Rift Valley i Kenya och Tanzania och nu ska det bli av! På vägen hem
+            stannar vi till i Ghana. Om du vill ge någon present så får du gärna
+            bidra till denna, som jag hoppas, fantastiska upplevelse. Se olika
+            önskningar genom att klicka på tårtljusen i Rebeccas fina teckning. Det
+            går väldigt bra att skriva in er grattishälsning här i stället för i
+            separat födelsedagskort :-)
         </p>
-        <button id="launch">Se önskningar</button>
-    </section>
 
-    <figure id="map" class="hidden">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 0 4961 3507" preserveAspectRatio="xMinYMin meet">
-            <image width="4961" height="3507" xlink:href="./background.webp" />
-        </svg>
-    </figure>
+        <p class="warning">
+            <!-- TODO: fixa text! -->
+            VARNING: bla bla bla fixa text om liten skärm
+        </p>
+
+        <button id="launch">Se önskningar</button>
+
+    </section>
 
     <!-- <section>
         <h2>Instruktioner</h2>
@@ -42,10 +61,8 @@
 <script>
     const btn = document.querySelector("#launch");
     const hero = document.querySelector("#hero");
-    const mapEl = document.querySelector("#map");
     btn.addEventListener("click", () => {
         hero.classList.toggle("hidden");
-        mapEl.classList.toggle("hidden");
     });
 </script>
 
