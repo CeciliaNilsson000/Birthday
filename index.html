@@ -119,32 +119,76 @@
         kilimanjaro: [
             {
                 title: "Besök Kilimanjaro",
-                amount: 1000,
+                amount: "1000 kr",
             },
+        ],
+        giraff: [
             {
-                title: "Klättra på Kilimanjaro",
-                amount: 2000,
+                title: "Cykeltur och vandring Hell's gate nationalpark",
+                amount: "400 kr",
             },
         ],
         hotell: [
             {
-                title: "Bo på hotell",
-                amount: 500,
+                title: "Hotellnätter",
+                amount: "10 hotellnätter à 500 kr",
+            },
+        ],
+        elefant: [
+            {
+                title: "Safari i Serengeti",
+                amount: "4500 kr",
             },
             {
                 title
-                    : "Frukost på rummet",
-                amount: 200,
+                    : "Safari i Ngorongoro-kratern",
+                amount: "2000 kr",
             },
         ],
         flygplan: [
             {
-                title: "Flygresa",
-                amount: 2000,
+                title: "Flyg till Kenya",
+                amount: "7000 kr",
             },
             {
-                title: "Flygresa till Ghana",
-                amount: 3000,
+                title: "Buss ToR Kenya-Tanzania",
+                amount: "700 kr",
+            },
+            {
+                title: "Flyg till Ghana",
+                amount: "4500 kr",
+            },
+            {
+                title: "Flyg till Köpenhamn",
+                amount: "7000 kr",
+            },
+        ],
+        hydda: [
+            {
+                title: "Ryggsäck",
+                amount: "800 kr eller ungefär som denna",
+            },
+            {
+                title: "Myggnät",
+                amount: "700 kr eller ungefär som detta",
+            },
+            {
+                title: "Vaccination",
+                amount: "1500 kr",
+            },
+        ],
+        voluntar: [
+            {
+                title: "Voluntärarbete",
+                amount: "5000 kr",
+            },
+            {
+                title: "Skolmaterial till barnen",
+                amount: "Böcker på engelska, pennor, anteckningsbok mm"
+            },
+            {
+                title: "Vaccination",
+                amount: "1500 kr",
             },
         ],
     };
@@ -187,7 +231,7 @@
                 ${gift.map((g) => `
                     <tr>
                         <td>${g.title}</td>
-                        <td>${g.amount} kr</td>
+                        <td>${g.amount} </td>
                     </tr>
                 `).join("")}
             `;
