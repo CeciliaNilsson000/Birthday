@@ -77,20 +77,29 @@
     <!-- Modal Dialog -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h1 id="modal-title">title</h1>
-                    <h2 id="modal-amount">0000 kr</h2>
-                </div>
-                <span class="close">&times;</span>
+            <span class="close">&times;</span>
+
+            <div>
+                <table class="modal-table">
+                    <thead>
+                        <tr>
+                            <th>Önskning</th>
+                            <th>Pris</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>titel</td>
+                        <td>0000 kr</td>
+                    </tr>
+                </table>
+                <form id="modal-form" method="post">
+                    <label for="sender">Avsändare:</label>
+                    <input type="text" id="sender" name="sender"></input>
+                    <label for="message">Meddelande:</label>
+                    <textarea id="message" name="message"></textarea>
+                    <button type="submit">Skicka</button>
+                </form>
             </div>
-            <form id="modal-form" method="post">
-                <label for="sender">Avsändare:</label>
-                <input type="text" id="sender" name="sender"></input>
-                <label for="message">Meddelande:</label>
-                <textarea id="message" name="message"></textarea>
-                <button type="submit">Skicka</button>
-            </form>
         </div>
     </div>
 
@@ -107,10 +116,37 @@
 <script>
     const BACKEND_URL = "http://localhost:8000/";
     const GIFTS = {
-        kilimanjaro: {
-            title: "Besök Kilimanjaro",
-            amount: 1000,
-        }
+        kilimanjaro: [
+            {
+                title: "Besök Kilimanjaro",
+                amount: 1000,
+            },
+            {
+                title: "Klättra på Kilimanjaro",
+                amount: 2000,
+            },
+        ],
+        hotell: [
+            {
+                title: "Bo på hotell",
+                amount: 500,
+            },
+            {
+                title
+                    : "Frukost på rummet",
+                amount: 200,
+            },
+        ],
+        flygplan: [
+            {
+                title: "Flygresa",
+                amount: 2000,
+            },
+            {
+                title: "Flygresa till Ghana",
+                amount: 3000,
+            },
+        ],
     };
 
     const btn = document.querySelector("#launch");
@@ -124,6 +160,7 @@
     const modalForm = document.getElementById("modal-form");
     const modalTitle = document.getElementById("modal-title");
     const modalAmount = document.getElementById("modal-amount");
+    const modalTable = document.querySelector(".modal-table");
 
     const senderInput = document.getElementById("sender");
     const messageInput = document.getElementById("message");
@@ -138,8 +175,22 @@
             const giftId = dot.getAttribute("data-id");
             console.log(`Dot ${giftId} clicked!`);
 
-            modalTitle.innerText = GIFTS[giftId]?.title ?? "missing_title";
-            modalAmount.innerText = `${GIFTS[giftId]?.amount ?? "missing_amount"} kr`;
+            // title and amount for each gift instead
+            const gift = GIFTS[giftId];
+            modalTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Önskning</th>
+                        <th>Pris</th>
+                    </tr>
+                </thead>
+                ${gift.map((g) => `
+                    <tr>
+                        <td>${g.title}</td>
+                        <td>${g.amount} kr</td>
+                    </tr>
+                `).join("")}
+            `;
 
             // Show the modal
             modal.style.display = "block";
