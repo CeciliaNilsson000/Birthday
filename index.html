@@ -60,14 +60,15 @@
             Rift Valley i Kenya och Tanzania och nu ska det bli av! På vägen hem
             stannar vi till i Ghana. Om du vill ge någon present så får du gärna
             bidra till denna, som jag hoppas, fantastiska upplevelse. Se olika
-            önskningar genom att klicka på tårtljusen i Rebeccas fina teckning. Det
+            önskningar genom att klicka på paketen i Rebeccas fina teckning. Det
             går väldigt bra att skriva in er grattishälsning här i stället för i
             separat födelsedagskort :-)
         </p>
 
         <p class="warning">
             <!-- TODO: fixa text! -->
-            VARNING: bla bla bla fixa text om liten skärm
+            VARNING: Bilden är för liten! Vänligen förstora/välj liggande läge på mobilen annars syns inte alla
+            önskningar.
         </p>
 
         <button id="launch">Se önskningar</button>
@@ -217,7 +218,7 @@
     // Get all pulsating dots
     const dots = document.querySelectorAll(".dot");
 
-   /** @type {Array<{name: string, gift: string, message: string}>} */
+    /** @type {Array<{name: string, gift: string, message: string}>} */
     const data = await fetch(BACKEND_URL)
         .then((response) => response.json())
         .catch((error) => {
@@ -247,7 +248,7 @@
                     </tr>
                 `).join("")}
             `;
-            
+
             const messages = data?.filter((d) => d.gift === giftId) ?? [];
             if (messages.length > 0) {
                 modalFeed.innerHTML = `
