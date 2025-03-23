@@ -100,10 +100,12 @@
                     <button type="submit">Skicka</button>
                 </form>
             </div>
-        </div>
-    </div>
 
-    <!-- <section>
+            <div class="modal-feed">
+            </div>
+        </div>
+
+        <!-- <section>
         <h2>Instruktioner</h2>
         <p>
             Ge present genom att skriva in ert namn/hälsning på något ni vill ge hela eller delar av. (Detta kommer
@@ -114,6 +116,14 @@
 </body>
 
 <script>
+    const btn = document.querySelector("#launch");
+    const hero = document.querySelector("#hero");
+    btn.addEventListener("click", () => {
+        hero.classList.toggle("hidden");
+    });
+</script>
+
+<script type="module">
     const BACKEND_URL = "http://localhost:8000/";
     const GIFTS = {
         kilimanjaro: [
@@ -193,24 +203,26 @@
         ],
     };
 
-    const btn = document.querySelector("#launch");
-    const hero = document.querySelector("#hero");
-    btn.addEventListener("click", () => {
-        hero.classList.toggle("hidden");
-    });
-
     // Get the modal and form elements
     const modal = document.getElementById("modal");
     const modalForm = document.getElementById("modal-form");
     const modalTitle = document.getElementById("modal-title");
     const modalAmount = document.getElementById("modal-amount");
     const modalTable = document.querySelector(".modal-table");
+    const modalFeed = document.querySelector(".modal-feed");
 
     const senderInput = document.getElementById("sender");
     const messageInput = document.getElementById("message");
 
     // Get all pulsating dots
     const dots = document.querySelectorAll(".dot");
+
+   /** @type {Array<{name: string, gift: string, message: string}>} */
+    const data = await fetch(BACKEND_URL)
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 
     // Add click event listeners to dots
     dots.forEach((dot) => {
@@ -235,6 +247,24 @@
                     </tr>
                 `).join("")}
             `;
+            
+            const messages = data?.filter((d) => d.gift === giftId) ?? [];
+            if (messages.length > 0) {
+                modalFeed.innerHTML = `
+                    <h2>Meddelanden</h2>
+                    <ul>
+                        ${messages
+                        .map((d) => `
+                            <li>
+                                <p>${d.name}</p>
+                                <p><i>${d.message}</i></p>
+                            </li>
+                        `).join("")}
+                    </ul>
+                `;
+            } else {
+                modalFeed.innerHTML = "";
+            }
 
             // Show the modal
             modal.style.display = "block";
@@ -253,7 +283,6 @@
                     body: JSON.stringify({
                         name: sender,
                         gift: giftId,
-                        amount: GIFTS[giftId]?.amount ?? -1,
                         greeting: message,
                     }),
                 })
