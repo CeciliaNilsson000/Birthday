@@ -14,12 +14,12 @@
         <svg class="svg-overlay" viewBox="0 0 2560 1080" preserveAspectRatio="xMidYMid slice"
             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" xmlns="http://www.w3.org/2000/svg">
 
-            <a href="#hotell">
+            <a href="#hotell" class="dot" data-id="hotell">
                 <circle class="pulsating-dot" cx="720" cy="800" r="30" fill="white"></circle>
                 <circle class="radiating-circle" cx="720" cy="800" r="30" fill="white" fill-opacity="0.4"></circle>
             </a>
 
-            <a href="#kilimanjaro">
+            <a href="#kilimanjaro" class="dot" data-id="kilimanjaro">
                 <circle class="pulsating-dot" cx="900" cy="320" r="30" fill="white"></circle>
                 <circle class="radiating-circle" cx="900" cy="320" r="30" fill="white" fill-opacity="0.4"></circle>
             </a>
@@ -48,6 +48,26 @@
 
     </section>
 
+    <!-- Modal Dialog -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h1 id="modal-title">title</h1>
+                    <h2 id="modal-amount">0000 kr</h2>
+                </div>
+                <span class="close">&times;</span>
+            </div>
+            <form id="modal-form" method="post">
+                <label for="sender">Avsändare:</label>
+                <input type="text" id="sender" name="sender"></input>
+                <label for="message">Meddelande:</label>
+                <textarea id="message" name="message"></textarea>
+                <button type="submit">Skicka</button>
+            </form>
+        </div>
+    </div>
+
     <!-- <section>
         <h2>Instruktioner</h2>
         <p>
@@ -59,10 +79,90 @@
 </body>
 
 <script>
+    const BACKEND_URL = "http://localhost:8000/";
+    const GIFTS = {
+        kilimanjaro: {
+            title: "Besök Kilimanjaro",
+            amount: 1000,
+        }
+    };
+
     const btn = document.querySelector("#launch");
     const hero = document.querySelector("#hero");
     btn.addEventListener("click", () => {
         hero.classList.toggle("hidden");
+    });
+
+    // Get the modal and form elements
+    const modal = document.getElementById("modal");
+    const modalForm = document.getElementById("modal-form");
+    const modalTitle = document.getElementById("modal-title");
+    const modalAmount = document.getElementById("modal-amount");
+
+    const senderInput = document.getElementById("sender");
+    const messageInput = document.getElementById("message");
+
+    // Get all pulsating dots
+    const dots = document.querySelectorAll(".dot");
+
+    // Add click event listeners to dots
+    dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+            // Get the data-id attribute of the clicked dot
+            const giftId = dot.getAttribute("data-id");
+            console.log(`Dot ${giftId} clicked!`);
+
+            modalTitle.innerText = GIFTS[giftId]?.title ?? "missing_title";
+            modalAmount.innerText = `${GIFTS[giftId]?.amount ?? "missing_amount"} kr`;
+
+            // Show the modal
+            modal.style.display = "block";
+
+            // Handle form submission
+            modalForm.onsubmit = (e) => {
+                e.preventDefault(); // Prevent form from submitting
+                const sender = senderInput.value;
+                const message = messageInput.value;
+
+                fetch(BACKEND_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: sender,
+                        gift: giftId,
+                        amount: GIFTS[giftId]?.amount ?? -1,
+                        greeting: message,
+                    }),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+
+                // Close the modal and reset the form
+                modal.style.display = "none";
+                modalForm.reset();
+            };
+        });
+    });
+
+    // Close the modal when the close button is clicked
+    document.querySelector(".close").addEventListener("click", () => {
+        modal.style.display = "none";
+        modalForm.reset();
+    });
+
+    // Close the modal when clicking outside of it
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            modalForm.reset();
+        }
     });
 </script>
 
