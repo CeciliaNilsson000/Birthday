@@ -15,8 +15,8 @@
             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" xmlns="http://www.w3.org/2000/svg">
 
             <a href="#hotell" class="dot" data-id="hotell">
-                <circle class="pulsating-dot" cx="720" cy="800" r="30" fill="white"></circle>
-                <circle class="radiating-circle" cx="720" cy="800" r="30" fill="white" fill-opacity="0.4"></circle>
+                <circle class="pulsating-dot" cx="540" cy="600" r="30" fill="white"></circle>
+                <circle class="radiating-circle" cx="540" cy="600" r="30" fill="white" fill-opacity="0.4"></circle>
             </a>
 
             <a href="#kilimanjaro" class="dot" data-id="kilimanjaro">
@@ -25,20 +25,20 @@
             </a>
 
             <a href="#flygplan" class="dot" data-id="flygplan">
-                <circle class="pulsating-dot" cx="2000" cy="150" r="30" fill="white"></circle>
-                <circle class="radiating-circle" cx="2000" cy="150" r="30" fill="white" fill-opacity="0.4"></circle>
+                <circle class="pulsating-dot" cx="1900" cy="150" r="30" fill="white"></circle>
+                <circle class="radiating-circle" cx="1900" cy="150" r="30" fill="white" fill-opacity="0.4"></circle>
             </a>
 
             <a href="#giraff" class="dot" data-id="giraff">
-                <circle class="pulsating-dot" cx="1300" cy="400" r="30" fill="white"></circle>
-                <circle class="radiating-circle" cx="1300" cy="400" r="30" fill="white" fill-opacity="0.4"></circle>
+                <circle class="pulsating-dot" cx="1250" cy="480" r="30" fill="white"></circle>
+                <circle class="radiating-circle" cx="1250" cy="480" r="30" fill="white" fill-opacity="0.4"></circle>
             </a>
 
-              <a href="#elefant" class="dot" data-id="elefant">
-                <circle class="pulsating-dot" cx="1250" cy="900" r="30" fill="white"></circle>
-                <circle class="radiating-circle" cx="1250" cy="900" r="30" fill="white" fill-opacity="0.4"></circle>
+            <a href="#elefant" class="dot" data-id="elefant">
+                <circle class="pulsating-dot" cx="1250" cy="800" r="30" fill="white"></circle>
+                <circle class="radiating-circle" cx="1250" cy="800" r="30" fill="white" fill-opacity="0.4"></circle>
             </a>
-        
+
         </svg>
     </div>
 
@@ -152,13 +152,13 @@
                         greeting: message,
                     }),
                 })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("Success:", data);
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Success:", data);
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
 
                 // Close the modal and reset the form
                 modal.style.display = "none";
