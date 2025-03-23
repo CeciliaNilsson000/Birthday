@@ -13,8 +13,8 @@ body {
     -webkit-font-smoothing: antialiased;
 
     background-color: #bdd2e2;
-    background-image: url("bild.png");
-    background-size: contain;
+    background-image: url("background.webp");
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
@@ -65,8 +65,7 @@ h6 {
 .hero {
     max-width: 80ch;
     padding: 75px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.6);
     border-radius: 50px;
     backdrop-filter: blur(5px);
     font-size: 18px;
