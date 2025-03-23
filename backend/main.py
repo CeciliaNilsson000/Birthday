@@ -11,7 +11,6 @@ db.execute(
     CREATE TABLE IF NOT EXISTS gift_records(
     name        TEXT,
     gift        TEXT,
-    amount      INT,
     greeting    TEXT,
     PRIMARY KEY (name, gift)
     )
@@ -30,7 +29,6 @@ app.add_middleware(
 class GiftRecord(BaseModel):
     name: str
     gift: str
-    amount: int
     greeting: str
 
 @app.get("/")
@@ -38,11 +36,11 @@ async def get_gifts():
     c = db.cursor()
     c.execute(
         '''
-        SELECT    name, gift, amount, greeting
+        SELECT    name, gift, greeting
         FROM      gift_records
         '''
     )
-    return [row for row in c]
+    return [{"name": name, "gift": gift, "message": greeting} for name, gift, greeting in c]
 
 @app.post("/")
 async def post_gift(gift_record: GiftRecord):
@@ -51,10 +49,11 @@ async def post_gift(gift_record: GiftRecord):
         c.execute(
             '''
             INSERT
-            INTO gift_records(name, gift, amount, greeting)
-            VALUES(?, ?, ?, ?)
+            INTO gift_records(name, gift, greeting)
+            VALUES(?, ?, ?)
             ''',
-            [gift_record.name, gift_record.gift, gift_record.amount, gift_record.greeting]
+            [gift_record.name, gift_record.gift, gift_record.greeting]
         )
+        db.commit()
     except sqlite3.IntegrityError as e:
         print("Duplicate entry!")
